@@ -23,7 +23,6 @@ space = 2;
 //the height of the lid
 lH = 10;
 
-
 /* [Bottom] */
 //should not be < 1
 nrOfSeperators = 5;
@@ -52,9 +51,10 @@ module file_card_box_main(){
             }
         }
     };
-    translate ([300, 0, 0]){
-        topBottom();
-    }
+
+    translate ([0, 0, h]){
+        boxTop();
+    };
 }
 
 
@@ -74,25 +74,27 @@ module boxBottom (){
             //seperators
             for (i=[0:nrOfSeperators - 1])
                 // first wall + already set walls + the wall strength of the set walls
-                translate([0, wallStrength + sBS + (i * sBS) + (i * wallStrength), 0])
-                    cube([w, wallStrength, h - 10]);
+                translate([0, wallStrength + sBS + (i * sBS) + (i * wallStrength), 0]){
+                    cube([w, wallStrength, h - lH]);
+            }
         }
-        
     }
 }
 
-module topBottom (){
+module boxTop (){
     difference() {
 
         union() { 
             //shell
             cube ([w, d, lH]) ;
-            cube([])
-        }
 
+            translate([wallStrength / 2, wallStrength / 2, 0]) {
+                cube([w - wallStrength, d - wallStrength, lH]);
+            }
+        }
         //remove inside
         translate([wallStrength, wallStrength, wallStrength]){
-            cube ([w - wallStrength*2, d-wallStrength*2, h-wallStrength+00.1]);
+            cube ([w - wallStrength*2, d-wallStrength*2, h-wallStrength+0.1]);
         }
     };
 }
