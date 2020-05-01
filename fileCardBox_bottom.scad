@@ -76,9 +76,11 @@ module FileCardBoxMain(){
 module BoxBottom (){
     union() {
         //text
-        translate([1, d/2, h/2]){
-            rotate([90, 0, -90]){
-                BottomBoxText();
+        if(enable_bottom_text){
+            translate([1, d/2, h/2]){
+                rotate([90, 0, -90]){
+                    BottomBoxText();
+                }
             }
         }
         //box
