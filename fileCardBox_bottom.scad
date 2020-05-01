@@ -131,18 +131,18 @@ module BoxTop (){
                     }
                 }   
             }
-            else{
-                difference() { 
-                    //shell
-                    cube ([w, d, lH]);
-                    //remove inside
-                    translate([wall_strength, wall_strength, -wall_strength]){
-                        cube ([w - wall_strength*2, d-wall_strength*2, lH+wall_strength]);
-                    }
+        else{
+            difference() { 
+                //shell
+                cube ([w, d, lH]);
+                //remove inside 
+                translate([wall_strength, wall_strength, wall_strength]){
+                    cube ([w - wall_strength*2, d-wall_strength*2, lH+wall_strength+lid_text_extrusion]);
                 }
             }
         }
     }
+}
 
     module BottomBoxText (){
         linear_extrude(bottom_text_extrusion){
