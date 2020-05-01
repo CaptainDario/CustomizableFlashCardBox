@@ -12,10 +12,10 @@ use <./fonts/togalite/togalite-bold.otf>;
 
 
 /* [general] */
-//the thickness of all walls
-wall_strength = 3;
+//
 enable_bottom = true;
 enable_lid = true;
+text_resolution = 75;
 
 /* [file card] */
 //file card height
@@ -45,6 +45,8 @@ bottom_text_extrusion = 4;
 
 /* [Hidden] */
 //box dimensions
+//the thickness of all walls
+wall_strength = 3;
 //box width
 w = fW + space;
 //box depth
@@ -74,8 +76,8 @@ module FileCardBoxMain(){
 module BoxBottom (){
     union() {
         //text
-        translate([w, d/2, h/2]){
-            rotate([90, 0, 90]){
+        translate([1, d/2, h/2]){
+            rotate([90, 0, -90]){
                 BottomBoxText();
             }
         }
@@ -87,6 +89,7 @@ module BoxBottom (){
                     union() {
                         //shell
                         cube ([w, d, h]) ;
+                        //line for the lid to stick
                         translate([wall_strength/2, wall_strength/2, h]){
                             cube([w - wall_strength, d - wall_strength, lH/2]);
                         };
@@ -109,32 +112,51 @@ module BoxBottom (){
 }
 
 module BoxTop (){
-    rotate([180, 0, 0]){
-        difference() {
-
-            //shell
-            cube ([w, d, lH]);
-            //remove inside
-            translate([wall_strength, wall_strength, wall_strength]){
-                cube ([w - wall_strength*2, d-wall_strength*2, h-wall_strength+0.1]);
+    translate ([fW + 10, 0, 0]){
+        if(enable_lid_text){
+            difference() {
+                //shell
+                cube ([w, d, lH]);
+                //remove inside 
+                translate([wall_strength, wall_strength, wall_strength+lid_text_extrusion]){
+                    cube ([w - wall_strength*2, d-wall_strength*2, lH+wall_strength+lid_text_extrusion]);
+                }
+                //remove text
+                translate([w/2, d/2, lid_text_extrusion]){
+                    rotate([180, 0, -90]){
+                            LidBoxText();
+                        }
+                    }
+                }   
             }
+            else{
+                difference() { 
+                    //shell
+                    cube ([w, d, lH]);
+                    //remove inside
+                    translate([wall_strength, wall_strength, -wall_strength]){
+                        cube ([w - wall_strength*2, d-wall_strength*2, lH+wall_strength]);
+                    }
+                }
+            }
+        }
+    }
+
+    module BottomBoxText (){
+        linear_extrude(bottom_text_extrusion){
+            text(text=bottom_box_text, size=bottom_text_size, font=bottom_text_font,
+            halign="center", valign="center",
+            $fn=text_resolution);
         };
     }
-}
 
-module BottomBoxText (){
-    linear_extrude(bottom_text_extrusion){
-        text(text=bottom_box_text, size=bottom_text_size, font=bottom_text_font,
-        halign="center", valign="center");
-    };
-}
+    module LidBoxText (){
+        linear_extrude(lid_text_extrusion + 0.02){
+            text(text=lid_box_text, size=lid_text_size, font=lid_text_font,
+            halign="center", valign="center",
+            $fn=text_resolution);
+        };
+    }
 
-module LidBoxText (){
-    linear_extrude(lid_text_extrusion){
-        text(text=lid_box_text, size=lid_text_size, font=lid_text_font,
-        halign="center", valign="center");
-    };
-}
-
-//MAIN
-FileCardBoxMain();
+    //MAIN
+    FileCardBoxMain();
