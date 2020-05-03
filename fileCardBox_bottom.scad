@@ -1,5 +1,16 @@
 //font(s)
+//toga
+use <./fonts/togalite/togalite-black.otf>;
 use <./fonts/togalite/togalite-bold.otf>;
+use <./fonts/togalite/togalite-heavy.otf>;
+use <./fonts/togalite/togalite-light.otf>;
+use <./fonts/togalite/togalite-medium.otf>;
+use <./fonts/togalite/togalite-regular.otf>;
+//yu gothic
+use <./fonts/yu_gothic/YuGothic-Medium.ttf>;
+//kanji cal.
+use<./fonts/nagayamakai.otf>;
+use<./fonts/riitf/RiiT_F.otf>;
 //models
 
 // file card box (1 unit == 1mm)
@@ -30,18 +41,20 @@ space = 2;
 lH = 10;
 enable_lid_text = true;
 lid_box_text = "日本語の単語";
-lid_text_font = "togalite-bold";
+lid_text_font = "togalite-light";
 lid_text_size = 20;
 lid_text_extrusion = 4;
+lid_text_font_spacing = 0.8;
 
 /* [Bottom] */
 //should not be < 1
 nrOfSeperators = 5;
 enable_bottom_text = true;
 bottom_box_text = "日本語の単語";
-bottom_text_font = "togalite-bold";
+bottom_text_font = "togalite-light";
 bottom_text_size = 20;
 bottom_text_extrusion = 4;
+bottom_text_font_spacing = 0.8;
 
 /* [Hidden] */
 //box dimensions
@@ -59,17 +72,15 @@ sBS = (d - wall_strength * (2 + nrOfSeperators)) / (nrOfSeperators + 1);
 
 module FileCardBoxMain(){
 
-    union(){
-        //bottom
-        if(enable_bottom){
-            BoxBottom();
-        }
+    //bottom
+    if(enable_bottom){
+        BoxBottom();
+    }
 
-        //top
-        if(enable_lid){
-            BoxTop();
-        }
-    };
+    //top
+    if(enable_lid){
+        BoxTop();
+    }
 }
 
 
@@ -77,7 +88,7 @@ module BoxBottom (){
     union() {
         //text
         if(enable_bottom_text){
-            translate([1, d/2, h/2]){
+            translate([0.3, d/2, h/2]){
                 rotate([90, 0, -90]){
                     BottomBoxText();
                 }
@@ -144,21 +155,22 @@ module BoxTop (){
     }
 }
 
-    module BottomBoxText (){
-        linear_extrude(bottom_text_extrusion){
-            text(text=bottom_box_text, size=bottom_text_size, font=bottom_text_font,
-            halign="center", valign="center",
-            $fn=text_resolution);
-        };
-    }
+module BottomBoxText (){
+    linear_extrude(bottom_text_extrusion){
+        text(text=bottom_box_text, size=bottom_text_size, font=bottom_text_font, spacing=lid_text_font_spacing,
+        halign="center", valign="center",
+        $fn=text_resolution);
+    };
+}
 
-    module LidBoxText (){
-        linear_extrude(lid_text_extrusion + 0.02){
-            text(text=lid_box_text, size=lid_text_size, font=lid_text_font,
-            halign="center", valign="center",
-            $fn=text_resolution);
-        };
-    }
+module LidBoxText (){
+    linear_extrude(lid_text_extrusion + 0.02){
+        text(text=lid_box_text, size=lid_text_size, font=lid_text_font, spacing=bottom_text_font_spacing,
+        halign="center", valign="center",
+        $fn=text_resolution);
+    };
+}
 
     //MAIN
     FileCardBoxMain();
+
