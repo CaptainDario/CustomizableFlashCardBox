@@ -29,6 +29,8 @@ enable_lid = true;
 text_resolution = 75;
 
 /* [file card] */
+//the type of the file card
+fileCardType = "a8"; //[a8:A8, a7:A7]
 //file card height
 fH = 52;
 //file card height
@@ -41,20 +43,20 @@ space = 2;
 lH = 10;
 enable_lid_text = true;
 lid_box_text = "日本語の単語";
-lid_text_font = "togalite-light";
+lid_text_font = "togalite:style=medium";
 lid_text_size = 20;
 lid_text_extrusion = 4;
-lid_text_font_spacing = 0.8;
+lid_text_font_spacing = 1;
 
 /* [Bottom] */
 //should not be < 1
 nrOfSeperators = 5;
 enable_bottom_text = true;
 bottom_box_text = "日本語の単語";
-bottom_text_font = "togalite-light";
+bottom_text_font = "togalite:style=medium";
 bottom_text_size = 20;
 bottom_text_extrusion = 4;
-bottom_text_font_spacing = 0.8;
+bottom_text_font_spacing = 1;
 
 /* [Hidden] */
 //box dimensions
@@ -125,7 +127,7 @@ module BoxBottom (){
 }
 
 module BoxTop (){
-    translate ([fW + 10, 0, 0]){
+    translate ([fW + 2*wall_strength + 10, 0, 0]){
         if(enable_lid_text){
             difference() {
                 //shell
@@ -157,7 +159,7 @@ module BoxTop (){
 
 module BottomBoxText (){
     linear_extrude(bottom_text_extrusion){
-        text(text=bottom_box_text, size=bottom_text_size, font=bottom_text_font, spacing=lid_text_font_spacing,
+        text(text=bottom_box_text, size=bottom_text_size, font=bottom_text_font, spacing=bottom_text_font_spacing,
         halign="center", valign="center",
         $fn=text_resolution);
     };
@@ -165,7 +167,7 @@ module BottomBoxText (){
 
 module LidBoxText (){
     linear_extrude(lid_text_extrusion + 0.02){
-        text(text=lid_box_text, size=lid_text_size, font=lid_text_font, spacing=bottom_text_font_spacing,
+        text(text=lid_box_text, size=lid_text_size, font=lid_text_font, spacing=lid_text_font_spacing,
         halign="center", valign="center",
         $fn=text_resolution);
     };
