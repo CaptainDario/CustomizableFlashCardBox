@@ -19,51 +19,51 @@ use<./fonts/riitf/RiiT_F.otf>;
 //      v 1.0 - initial release
 //          - resizable box 
 //          - text for lid and box
-//          - 
+//          - select different file card sizes to match your needs 
 
 
 /* [general] */
 //
 enable_bottom = true;
 enable_lid = true;
-text_resolution = 75;
+text_resolution = 25;
 
 /* [file card] */
-//the type of the file card
-fileCardType = "a8"; //[a8:A8, a7:A7]
 //file card height
 fH = 52;
 //file card height
 fW = 74;
-//the space between card and box (should not be zero)
-space = 2;
 
 /* [lid] */
 //the height of the lid
 lH = 10;
 enable_lid_text = true;
-lid_box_text = "日本語の単語";
-lid_text_font = "togalite:style=medium";
-lid_text_size = 20;
+lid_box_text = "日本語 単語";
+lid_text_font = "nagayama\\_kai:style=Regular";
+lid_text_size = 30;
 lid_text_extrusion = 4;
-lid_text_font_spacing = 1;
+lid_text_font_spacing = 0.8;
 
 /* [Bottom] */
 //should not be < 1
 nrOfSeperators = 5;
 enable_bottom_text = true;
-bottom_box_text = "日本語の単語";
-bottom_text_font = "togalite:style=medium";
-bottom_text_size = 20;
+bottom_box_text = "日本語 単語";
+bottom_text_font = "nagayama\\_kai:style=Regular";
+bottom_text_size = 30;
 bottom_text_extrusion = 4;
-bottom_text_font_spacing = 1;
+bottom_text_font_spacing = 0.8;
 
 /* [Hidden] */
+//the space between card and box (should not be zero)
+space = 2;
+
+
 //box dimensions
 //the thickness of all walls
-wall_strength = 3;
+wall_strength = 2;
 //box width
-w = fW + space;
+w = fW + space*2 + wall_strength*2;
 //box depth
 d = 250 ; 
 // box height
@@ -85,11 +85,11 @@ module FileCardBoxMain(){
     }
 }
 
-
 module BoxBottom (){
     union() {
         //text
         if(enable_bottom_text){
+            
             translate([0.3, d/2, h/2]){
                 rotate([90, 0, -90]){
                     BottomBoxText();
@@ -173,6 +173,7 @@ module LidBoxText (){
     };
 }
 
-    //MAIN
-    FileCardBoxMain();
+
+//MAIN
+FileCardBoxMain();
 
