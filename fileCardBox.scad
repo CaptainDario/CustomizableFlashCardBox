@@ -106,7 +106,7 @@ module BoxBottom (){
                         cube ([w, d, h]) ;
                         //line for the lid to stick
                         translate([wall_strength/2, wall_strength/2, h]){
-                            cube([w - wall_strength, d - wall_strength, lH/2]);
+                            cube([w - wall_strength, d - wall_strength, lH-wall_strength-lid_text_extrusion]);
                         };
                     };
                     
