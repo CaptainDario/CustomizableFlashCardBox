@@ -45,7 +45,7 @@ lid_text_extrusion = 4;
 lid_text_font_spacing = 0.8;
 
 /* [Bottom] */
-//should not be < 1
+//how many dividers are placed in the box 
 nrOfSeperators = 5;
 enable_bottom_text = true;
 bottom_box_text = "日本語 単語";
@@ -116,10 +116,12 @@ module BoxBottom (){
                     };
                 };
                 //seperators
-                for (i=[0:nrOfSeperators - 1])
-                    // first wall + already set walls + the wall strength of the set walls
-                    translate([0, wall_strength + sBS + (i * sBS) + (i * wall_strength), 0]){
-                        cube([w, wall_strength, h - (lH/2 + 2)]);
+                if(nrOfSeperators > 0){
+                    for (i=[0:nrOfSeperators - 1])
+                        // first wall + already set walls + the wall strength of the set walls
+                        translate([0, wall_strength + sBS + (i * sBS) + (i * wall_strength), 0]){
+                            cube([w, wall_strength, h - (lH/2 + 2)]);
+                    }
                 }
             }
         }
