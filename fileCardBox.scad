@@ -135,8 +135,10 @@ module BoxTop (){
                 //shell
                 cube ([w, d, lH]);
                 //remove inside 
-                translate([wall_strength, wall_strength, wall_strength+lid_text_extrusion]){
-                    cube ([w - wall_strength*2, d-wall_strength*2, lH+wall_strength+lid_text_extrusion]);
+                translate([wall_strength/2, wall_strength/2, wall_strength+lid_text_extrusion]){
+                    cube ([w - wall_strength*2+ wall_strength,
+                            d-wall_strength*2+ wall_strength,
+                            lH+wall_strength+lid_text_extrusion]);
                 }
                 //remove text
                 translate([w/2, d/2, lid_text_extrusion]){
@@ -151,8 +153,10 @@ module BoxTop (){
                 //shell
                 cube ([w, d, lH]);
                 //remove inside 
-                translate([wall_strength, wall_strength, wall_strength]){
-                    cube ([w - wall_strength*2, d-wall_strength*2, lH+wall_strength+lid_text_extrusion]);
+                translate([wall_strength/2, wall_strength/2, wall_strength]){
+                    cube ([w - wall_strength*2 + wall_strength,
+                            d-wall_strength*2 + wall_strength,
+                            lH+wall_strength+lid_text_extrusion]);
                 }
             }
         }
