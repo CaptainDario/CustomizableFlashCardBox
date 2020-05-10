@@ -1,17 +1,3 @@
-//font(s)
-//toga
-use <./fonts/togalite/togalite-black.otf>;
-use <./fonts/togalite/togalite-bold.otf>;
-use <./fonts/togalite/togalite-heavy.otf>;
-use <./fonts/togalite/togalite-light.otf>;
-use <./fonts/togalite/togalite-medium.otf>;
-use <./fonts/togalite/togalite-regular.otf>;
-//yu gothic
-use <./fonts/yu_gothic/YuGothic-Medium.ttf>;
-//kanji cal.
-use<./fonts/nagayamakai.otf>;
-use<./fonts/riitf/RiiT_F.otf>;
-//models
 
 // file card box (1 unit == 1mm)
 // releases:
@@ -38,9 +24,9 @@ fW = 74;
 //the height of the lid
 lH = 10;
 enable_lid_text = true;
-lid_box_text = "日本語 単語";
-lid_text_font = "nagayama\\_kai:style=Regular";
-lid_text_size = 30;
+lid_box_text = "Flash card lid";
+lid_text_font = "";
+lid_text_size = 25;
 lid_text_extrusion = 4;
 lid_text_font_spacing = 0.8;
 
@@ -48,9 +34,9 @@ lid_text_font_spacing = 0.8;
 //how many dividers are placed in the box 
 nrOfSeperators = 5;
 enable_bottom_text = true;
-bottom_box_text = "日本語 単語";
-bottom_text_font = "nagayama\\_kai:style=Regular";
-bottom_text_size = 30;
+bottom_box_text = "Flash card bottom";
+bottom_text_font = "";
+bottom_text_size = 25;
 bottom_text_extrusion = 4;
 bottom_text_font_spacing = 0.8;
 
