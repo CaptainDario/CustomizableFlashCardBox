@@ -1,8 +1,9 @@
-
 // file card box (1 unit == 1mm)
 // releases:
+//      v 1.0.1  - added font example
+//          - changed defaults
 //
-//      v 1.0 - initial release
+//      v 1.0    - initial release:
 //          - resizable box 
 //          - text for lid and box
 //          - select different file card sizes to match your needs 
@@ -24,21 +25,21 @@ fW = 74;
 //the height of the lid
 lH = 10;
 enable_lid_text = true;
-lid_box_text = "Flash card lid";
-lid_text_font = "";
+lid_box_text = "DaAppLab";
+lid_text_font = "Liberation Sans:style=Regular";
 lid_text_size = 25;
 lid_text_extrusion = 4;
-lid_text_font_spacing = 0.8;
+lid_text_font_spacing = 1;
 
 /* [Bottom] */
 //how many dividers are placed in the box 
 nrOfSeperators = 5;
 enable_bottom_text = true;
-bottom_box_text = "Flash card bottom";
-bottom_text_font = "";
+bottom_box_text = "DaAppLab";
+bottom_text_font = "Liberation Sans:style=Regular";
 bottom_text_size = 25;
 bottom_text_extrusion = 4;
-bottom_text_font_spacing = 0.8;
+bottom_text_font_spacing = 1;
 
 /* [Hidden] */
 //the space between card and box (should not be zero)
